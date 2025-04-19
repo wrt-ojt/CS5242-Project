@@ -36,12 +36,36 @@ def override_config(config, args):
                     # Attempt type conversion based on default config type
                     target_type = type(config[key])
                     if target_type == bool:
-                        config[key] = value.lower() in ('true', '1', 't', 'yes', 'y')
+                        if isinstance(value, bool): # If argparse already provided a bool
+                            config[key] = value     # Use it directly
+                        elif isinstance(value, str): # If argparse provided a string
+                            # Convert the string to boolean
+                            config[key] = value.lower() in ('true', '1', 't', 'yes', 'y')
+                        else:
+                            # Try direct conversion for other types if possible, warn otherwise
+                            try:
+                                config[key] = bool(value)
+                            except:
+                                print(f"Warning: Cannot convert value '{value}' for key '{key}' to bool. Check argument/config.")
+                                # Keep default or raise error depending on desired strictness
+                                # config[key] = CONFIG[key] # Revert to original default if needed
                     elif target_type == int:
-                         config[key] = int(value)
+                        config[key] = int(value)
                     elif target_type == float:
-                         config[key] = float(value)
-                    else: # Primarily string or keep as is
+                        config[key] = float(value)
+                    # Handle lists specifically if you expect list inputs from cmd line
+                    elif target_type == list and isinstance(value, str):
+                        # Example: comma-separated integers
+                        try:
+                            config[key] = [int(x.strip()) for x in value.split(',')]
+                        except ValueError:
+                             # Example: comma-separated strings
+                            try:
+                                config[key] = [x.strip() for x in value.split(',')]
+                            except Exception as e_list:
+                                print(f"Warning: Could not parse list argument for {key}: {value}. Error: {e_list}")
+
+                    else: # Primarily string or keep value's original type if no match
                         config[key] = value
                 except (ValueError, TypeError) as e:
                      print(f"Warning: Could not convert argument for {key}={value} to type {target_type}. Using string. Error: {e}")
