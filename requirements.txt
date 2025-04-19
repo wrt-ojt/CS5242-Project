@@ -1,0 +1,9 @@
+# requirements.txt
+
+torch>=1.8.0       # Or specify version compatible with your CUDA toolkit, e.g., torch==1.13.1+cu117
+transformers>=4.10.0 # Use a reasonably recent version
+pandas>=1.0.0
+scikit-learn>=0.24.0
+tqdm
+Pillow>=8.0.0
+numpy>=1.19.0
