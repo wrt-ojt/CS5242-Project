@@ -114,8 +114,10 @@ def main(config):
     # Load labels
     print(f"Loading labels from {config['label_file']}...")
     try:
-        df = pd.read_csv(config['label_file'])
+        df = pd.read_csv(config['label_file']).dropna(how='all')
         # Basic validation (adapt column names 'ID', 'label' if different)
+        df['ID'] = df['ID'].astype(int)
+        df['class'] = df['class'].astype(int)
         if 'ID' not in df.columns or 'label' not in df.columns:
              raise ValueError("CSV must contain 'ID' and 'label' columns.")
         # Optional: Convert ID early if needed, handle potential errors
