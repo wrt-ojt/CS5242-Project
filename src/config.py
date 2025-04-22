@@ -35,7 +35,7 @@ CONFIG = {
     "num_classes": 3,
 
     # --- Training ---
-    "device": "cuda" if torch.cuda.is_available() else "cpu",
+    "device": "cuda:5" if torch.cuda.is_available() else "cpu",
     "batch_size": 128, # Reduced from 256 for potentially faster CPU processing / less bottleneck
     "num_epochs": 20, # Increased epochs, relying on early stopping
     "learning_rate_clip": 1e-6,
