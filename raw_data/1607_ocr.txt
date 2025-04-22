@@ -1,0 +1,4 @@
+if y
+
+rm 2
+meat

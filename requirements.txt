@@ -7,3 +7,4 @@ scikit-learn>=0.24.0
 tqdm
 Pillow>=8.0.0
 numpy>=1.19.0
+pytesseract>=0.3.13 # Use a reasonably recent version
