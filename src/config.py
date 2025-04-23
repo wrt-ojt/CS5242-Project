@@ -43,7 +43,7 @@ CONFIG = {
     "weight_decay_clip": 0.01, # Weight decay for regularization
     "weight_decay_head": 0.01,
     "dropout_attention": 0.1, # Dropout in attention layers
-    "dropout_mlp": 0.4,       # Increased dropout in MLP head for regularization
+    "dropout_mlp": 0.15,       # Increased dropout in MLP head for regularization
     "early_stopping_patience": 5, # Stop if val loss doesn't improve for 5 epochs
 
     # --- Dataloader ---

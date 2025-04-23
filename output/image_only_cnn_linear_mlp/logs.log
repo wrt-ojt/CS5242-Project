@@ -1,6 +1,6 @@
-2025-04-22 18:19:59,217 [INFO] Logging setup complete.
-2025-04-22 18:19:59,217 [INFO] Starting experiment: image_only_cnn_linear_mlp
-2025-04-22 18:19:59,217 [INFO] Configuration:
+2025-04-23 19:46:50,439 [INFO] Logging setup complete.
+2025-04-23 19:46:50,439 [INFO] Starting experiment: image_only_cnn_linear_mlp
+2025-04-23 19:46:50,439 [INFO] Configuration:
 {
     "raw_data_dir": "/disk3/wangrt/model/CS5242-Project/raw_data",
     "label_file": "/disk3/wangrt/model/CS5242-Project/label.csv",
@@ -29,7 +29,7 @@
     "weight_decay_clip": 0.01,
     "weight_decay_head": 0.01,
     "dropout_attention": 0.1,
-    "dropout_mlp": 0.5,
+    "dropout_mlp": 0.15,
     "early_stopping_patience": 5,
     "num_workers": 4,
     "val_split_ratio": 0.15,
@@ -48,19 +48,19 @@
     },
     "experiment_output_dir": "/disk3/wangrt/model/CS5242-Project/output/image_only_cnn_linear_mlp"
 }
-2025-04-22 18:19:59,219 [INFO] Random seed set to 42
-2025-04-22 18:19:59,220 [INFO] Creating DataLoaders...
-2025-04-22 18:19:59,228 [INFO] Initializing model...
-2025-04-22 18:20:01,132 [INFO] Model loaded on device: cuda
-2025-04-22 18:20:01,133 [INFO] Setting up optimizer...
-2025-04-22 18:20:01,134 [INFO] Optimizing 398 CLIP parameters with LR=0.0001, WD=0.01
-2025-04-22 18:20:01,134 [INFO] Optimizing 6 Head parameters with LR=0.001, WD=0.01
-2025-04-22 18:20:01,134 [INFO] --- Starting Training ---
-2025-04-22 18:20:01,135 [INFO] 
+2025-04-23 19:46:50,440 [INFO] Random seed set to 42
+2025-04-23 19:46:50,442 [INFO] Creating DataLoaders...
+2025-04-23 19:46:50,450 [INFO] Initializing model...
+2025-04-23 19:46:52,286 [INFO] Model loaded on device: cuda
+2025-04-23 19:46:52,286 [INFO] Setting up optimizer...
+2025-04-23 19:46:52,287 [INFO] Optimizing 398 CLIP parameters with LR=0.0001, WD=0.01
+2025-04-23 19:46:52,287 [INFO] Optimizing 6 Head parameters with LR=0.001, WD=0.01
+2025-04-23 19:46:52,287 [INFO] --- Starting Training ---
+2025-04-23 19:46:52,287 [INFO] 
 --- Epoch 1/10 ---
-2025-04-22 18:20:07,586 [INFO] Epoch 1 Train Loss: 0.9329
-2025-04-22 18:20:08,619 [INFO] Epoch 1 Validation Loss: 0.9295, Validation Accuracy: 0.5946
-2025-04-22 18:20:08,619 [INFO] Validation Classification Report (Epoch 1):
+2025-04-23 19:46:58,664 [INFO] Epoch 1 Train Loss: 0.9281
+2025-04-23 19:46:59,683 [INFO] Epoch 1 Validation Loss: 0.9109, Validation Accuracy: 0.5946
+2025-04-23 19:46:59,683 [INFO] Validation Classification Report (Epoch 1):
               precision    recall  f1-score   support
 
     negative       0.00      0.00      0.00       336
@@ -71,13 +71,13 @@
    macro avg       0.20      0.33      0.25      1115
 weighted avg       0.35      0.59      0.44      1115
 
-2025-04-22 18:20:08,619 [INFO] Epoch 1 duration: 7.48 seconds
-2025-04-22 18:20:09,813 [INFO] Validation accuracy improved to 0.5946. Saving best model to /disk3/wangrt/model/CS5242-Project/output/image_only_cnn_linear_mlp/best_model.pth
-2025-04-22 18:20:09,814 [INFO] 
+2025-04-23 19:46:59,683 [INFO] Epoch 1 duration: 7.40 seconds
+2025-04-23 19:47:00,799 [INFO] Validation accuracy improved to 0.5946. Saving best model to /disk3/wangrt/model/CS5242-Project/output/image_only_cnn_linear_mlp/best_model.pth
+2025-04-23 19:47:00,799 [INFO] 
 --- Epoch 2/10 ---
-2025-04-22 18:20:15,397 [INFO] Epoch 2 Train Loss: 0.9241
-2025-04-22 18:20:16,406 [INFO] Epoch 2 Validation Loss: 0.9057, Validation Accuracy: 0.5946
-2025-04-22 18:20:16,406 [INFO] Validation Classification Report (Epoch 2):
+2025-04-23 19:47:06,459 [INFO] Epoch 2 Train Loss: 0.9126
+2025-04-23 19:47:07,438 [INFO] Epoch 2 Validation Loss: 0.9035, Validation Accuracy: 0.5946
+2025-04-23 19:47:07,438 [INFO] Validation Classification Report (Epoch 2):
               precision    recall  f1-score   support
 
     negative       0.00      0.00      0.00       336
@@ -88,13 +88,13 @@ weighted avg       0.35      0.59      0.44      1115
    macro avg       0.20      0.33      0.25      1115
 weighted avg       0.35      0.59      0.44      1115
 
-2025-04-22 18:20:16,407 [INFO] Epoch 2 duration: 6.59 seconds
-2025-04-22 18:20:16,407 [INFO] Validation accuracy did not improve. Current best: 0.5946. Epochs without improvement: 1/5
-2025-04-22 18:20:16,407 [INFO] 
+2025-04-23 19:47:07,438 [INFO] Epoch 2 duration: 6.64 seconds
+2025-04-23 19:47:07,438 [INFO] Validation accuracy did not improve. Current best: 0.5946. Epochs without improvement: 1/5
+2025-04-23 19:47:07,438 [INFO] 
 --- Epoch 3/10 ---
-2025-04-22 18:20:22,132 [INFO] Epoch 3 Train Loss: 0.9193
-2025-04-22 18:20:23,153 [INFO] Epoch 3 Validation Loss: 0.9320, Validation Accuracy: 0.5946
-2025-04-22 18:20:23,154 [INFO] Validation Classification Report (Epoch 3):
+2025-04-23 19:47:13,134 [INFO] Epoch 3 Train Loss: 0.9087
+2025-04-23 19:47:14,102 [INFO] Epoch 3 Validation Loss: 0.9390, Validation Accuracy: 0.5946
+2025-04-23 19:47:14,103 [INFO] Validation Classification Report (Epoch 3):
               precision    recall  f1-score   support
 
     negative       0.00      0.00      0.00       336
@@ -105,13 +105,13 @@ weighted avg       0.35      0.59      0.44      1115
    macro avg       0.20      0.33      0.25      1115
 weighted avg       0.35      0.59      0.44      1115
 
-2025-04-22 18:20:23,154 [INFO] Epoch 3 duration: 6.75 seconds
-2025-04-22 18:20:23,154 [INFO] Validation accuracy did not improve. Current best: 0.5946. Epochs without improvement: 2/5
-2025-04-22 18:20:23,154 [INFO] 
+2025-04-23 19:47:14,103 [INFO] Epoch 3 duration: 6.66 seconds
+2025-04-23 19:47:14,103 [INFO] Validation accuracy did not improve. Current best: 0.5946. Epochs without improvement: 2/5
+2025-04-23 19:47:14,103 [INFO] 
 --- Epoch 4/10 ---
-2025-04-22 18:20:28,910 [INFO] Epoch 4 Train Loss: 0.9197
-2025-04-22 18:20:29,954 [INFO] Epoch 4 Validation Loss: 0.9319, Validation Accuracy: 0.5946
-2025-04-22 18:20:29,954 [INFO] Validation Classification Report (Epoch 4):
+2025-04-23 19:47:19,752 [INFO] Epoch 4 Train Loss: 0.9113
+2025-04-23 19:47:20,737 [INFO] Epoch 4 Validation Loss: 0.9010, Validation Accuracy: 0.5946
+2025-04-23 19:47:20,738 [INFO] Validation Classification Report (Epoch 4):
               precision    recall  f1-score   support
 
     negative       0.00      0.00      0.00       336
@@ -122,13 +122,13 @@ weighted avg       0.35      0.59      0.44      1115
    macro avg       0.20      0.33      0.25      1115
 weighted avg       0.35      0.59      0.44      1115
 
-2025-04-22 18:20:29,954 [INFO] Epoch 4 duration: 6.80 seconds
-2025-04-22 18:20:29,954 [INFO] Validation accuracy did not improve. Current best: 0.5946. Epochs without improvement: 3/5
-2025-04-22 18:20:29,954 [INFO] 
+2025-04-23 19:47:20,738 [INFO] Epoch 4 duration: 6.63 seconds
+2025-04-23 19:47:20,738 [INFO] Validation accuracy did not improve. Current best: 0.5946. Epochs without improvement: 3/5
+2025-04-23 19:47:20,738 [INFO] 
 --- Epoch 5/10 ---
-2025-04-22 18:20:35,654 [INFO] Epoch 5 Train Loss: 0.9249
-2025-04-22 18:20:36,716 [INFO] Epoch 5 Validation Loss: 0.9073, Validation Accuracy: 0.5946
-2025-04-22 18:20:36,717 [INFO] Validation Classification Report (Epoch 5):
+2025-04-23 19:47:26,403 [INFO] Epoch 5 Train Loss: 0.9027
+2025-04-23 19:47:27,420 [INFO] Epoch 5 Validation Loss: 0.9032, Validation Accuracy: 0.5946
+2025-04-23 19:47:27,420 [INFO] Validation Classification Report (Epoch 5):
               precision    recall  f1-score   support
 
     negative       0.00      0.00      0.00       336
@@ -139,13 +139,13 @@ weighted avg       0.35      0.59      0.44      1115
    macro avg       0.20      0.33      0.25      1115
 weighted avg       0.35      0.59      0.44      1115
 
-2025-04-22 18:20:36,717 [INFO] Epoch 5 duration: 6.76 seconds
-2025-04-22 18:20:36,717 [INFO] Validation accuracy did not improve. Current best: 0.5946. Epochs without improvement: 4/5
-2025-04-22 18:20:36,717 [INFO] 
+2025-04-23 19:47:27,420 [INFO] Epoch 5 duration: 6.68 seconds
+2025-04-23 19:47:27,420 [INFO] Validation accuracy did not improve. Current best: 0.5946. Epochs without improvement: 4/5
+2025-04-23 19:47:27,420 [INFO] 
 --- Epoch 6/10 ---
-2025-04-22 18:20:42,434 [INFO] Epoch 6 Train Loss: 0.9104
-2025-04-22 18:20:43,485 [INFO] Epoch 6 Validation Loss: 0.9220, Validation Accuracy: 0.5946
-2025-04-22 18:20:43,485 [INFO] Validation Classification Report (Epoch 6):
+2025-04-23 19:47:33,110 [INFO] Epoch 6 Train Loss: 0.8979
+2025-04-23 19:47:34,137 [INFO] Epoch 6 Validation Loss: 0.9385, Validation Accuracy: 0.5946
+2025-04-23 19:47:34,138 [INFO] Validation Classification Report (Epoch 6):
               precision    recall  f1-score   support
 
     negative       0.00      0.00      0.00       336
@@ -156,18 +156,18 @@ weighted avg       0.35      0.59      0.44      1115
    macro avg       0.20      0.33      0.25      1115
 weighted avg       0.35      0.59      0.44      1115
 
-2025-04-22 18:20:43,485 [INFO] Epoch 6 duration: 6.77 seconds
-2025-04-22 18:20:43,485 [INFO] Validation accuracy did not improve. Current best: 0.5946. Epochs without improvement: 5/5
-2025-04-22 18:20:43,485 [INFO] Early stopping triggered after 5 epochs without improvement.
-2025-04-22 18:20:43,485 [INFO] 
+2025-04-23 19:47:34,138 [INFO] Epoch 6 duration: 6.72 seconds
+2025-04-23 19:47:34,138 [INFO] Validation accuracy did not improve. Current best: 0.5946. Epochs without improvement: 5/5
+2025-04-23 19:47:34,138 [INFO] Early stopping triggered after 5 epochs without improvement.
+2025-04-23 19:47:34,139 [INFO] 
 Training finished. Best validation accuracy: 0.5946
-2025-04-22 18:20:43,485 [INFO] 
+2025-04-23 19:47:34,139 [INFO] 
 --- Evaluating on Test Set ---
-2025-04-22 18:20:44,035 [INFO] Loaded best model weights from /disk3/wangrt/model/CS5242-Project/output/image_only_cnn_linear_mlp/best_model.pth for testing.
-2025-04-22 18:20:44,685 [INFO] 
-Test Loss: 0.9188
-2025-04-22 18:20:44,685 [INFO] Test Accuracy: 0.5941
-2025-04-22 18:20:44,686 [INFO] Test Set Classification Report:
+2025-04-23 19:47:34,644 [INFO] Loaded best model weights from /disk3/wangrt/model/CS5242-Project/output/image_only_cnn_linear_mlp/best_model.pth for testing.
+2025-04-23 19:47:35,209 [INFO] 
+Test Loss: 0.8972
+2025-04-23 19:47:35,209 [INFO] Test Accuracy: 0.5941
+2025-04-23 19:47:35,209 [INFO] Test Set Classification Report:
               precision    recall  f1-score   support
 
     negative       0.00      0.00      0.00        72
@@ -178,5 +178,5 @@ Test Loss: 0.9188
    macro avg       0.20      0.33      0.25       239
 weighted avg       0.35      0.59      0.44       239
 
-2025-04-22 18:20:44,686 [INFO] Results saved to /disk3/wangrt/model/CS5242-Project/output/image_only_cnn_linear_mlp/test_results.json
-2025-04-22 18:20:44,686 [INFO] --- Experiment Finished: image_only_cnn_linear_mlp ---
+2025-04-23 19:47:35,210 [INFO] Results saved to /disk3/wangrt/model/CS5242-Project/output/image_only_cnn_linear_mlp/test_results.json
+2025-04-23 19:47:35,210 [INFO] --- Experiment Finished: image_only_cnn_linear_mlp ---

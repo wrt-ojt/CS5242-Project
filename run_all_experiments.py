@@ -6,49 +6,49 @@ experiments = [
         'experiment_name': 'multimodal_cross_attention_projection_cnn_linear_mlp',
         'modality': 'multimodal',
         'use_cross_attention': 'true',
-        'dropout_mlp': 0.5,  # 可根据需求调整
+        'dropout_mlp': 0.15,  # 可根据需求调整
         'classifier_hidden_layers': '1024,512',  # 可根据需求调整
     },
     {
         'experiment_name': 'multimodal_cross_attention_projection_cnn_linear_mlp_optional',
         'modality': 'multimodal',
         'use_cross_attention': 'true',
-        'dropout_mlp': 0.5,
+        'dropout_mlp': 0.15,
         'classifier_hidden_layers': '',
     },
     {
         'experiment_name': 'multimodal_cross_attention_projection_cnn_mlp',
         'modality': 'multimodal',
         'use_cross_attention': 'true',
-        'dropout_mlp': 0.5,
+        'dropout_mlp': 0.15,
         'classifier_hidden_layers': '1024,512',
     },
     {
         'experiment_name': 'multimodal_cross_attention_projection_cnn_mlp_optional',
         'modality': 'multimodal',
         'use_cross_attention': 'true',
-        'dropout_mlp': 0.5,
+        'dropout_mlp': 0.15,
         'classifier_hidden_layers': '',
     },
     {
         'experiment_name': 'multimodal_cross_attention_projection_cnn_linear_less_mlp',
         'modality': 'multimodal',
         'use_cross_attention': 'true',
-        'dropout_mlp': 0.3,
+        'dropout_mlp': 0.15,
         'classifier_hidden_layers': '512,256',
     },
     {
         'experiment_name': 'multimodal_cross_attention_projection_cnn_linear_more_mlp',
         'modality': 'multimodal',
         'use_cross_attention': 'true',
-        'dropout_mlp': 0.7,
+        'dropout_mlp': 0.15,
         'classifier_hidden_layers': '2048,1024',
     },
     {
         'experiment_name': 'image_only_cnn_linear_mlp',
         'modality': 'image',
         'use_cross_attention': 'false',
-        'dropout_mlp': 0.5,
+        'dropout_mlp': 0.15,
         'classifier_hidden_layers': '1024,512',
     },
     {
@@ -62,14 +62,14 @@ experiments = [
         'experiment_name': 'text_only_cnn_linear_mlp',
         'modality': 'text',
         'use_cross_attention': 'false',
-        'dropout_mlp': 0.5,
+        'dropout_mlp': 0.15,
         'classifier_hidden_layers': '1024,512',
     },
     {
         'experiment_name': 'text_only_cnn_linear_mlp_optional',
         'modality': 'text',
         'use_cross_attention': 'false',
-        'dropout_mlp': 0.5,
+        'dropout_mlp': 0.15,
         'classifier_hidden_layers': '',
     },
 ]

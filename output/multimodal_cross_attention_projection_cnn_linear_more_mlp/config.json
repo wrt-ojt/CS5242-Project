@@ -26,7 +26,7 @@
     "weight_decay_clip": 0.01,
     "weight_decay_head": 0.01,
     "dropout_attention": 0.1,
-    "dropout_mlp": 0.7,
+    "dropout_mlp": 0.15,
     "early_stopping_patience": 5,
     "num_workers": 4,
     "val_split_ratio": 0.15,

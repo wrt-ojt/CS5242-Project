@@ -1,5 +1,5 @@
 {
-    "test_loss": 0.9187794998288155,
+    "test_loss": 0.8971994519233704,
     "test_accuracy": 0.5941422594142259,
     "test_classification_report_dict": {
         "negative": {
