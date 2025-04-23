@@ -1,1 +1,5 @@
 **/*.pth
+**/*_classification_result.csv
+**/vocabulary_*.txt
+
+.DS_Store
