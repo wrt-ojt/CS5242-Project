@@ -1,106 +1,119 @@
 import subprocess
 
-# 定义TODO实验配置
+# 定义实验配置
 experiments = [
+    # 正常 baseline 多模态配置
     {
-        'experiment_name': 'multimodal_cross_attention_projection_cnn_linear_mlp',
+        'experiment_name': 'multimodal_all_default',
         'modality': 'multimodal',
         'use_cross_attention': 'true',
-        'dropout_mlp': 0.15,  # 可根据需求调整
-        'classifier_hidden_layers': '1024,512',  # 可根据需求调整
-    },
-    {
-        'experiment_name': 'multimodal_cross_attention_projection_cnn_linear_mlp_optional',
-        'modality': 'multimodal',
-        'use_cross_attention': 'true',
-        'dropout_mlp': 0.15,
-        'classifier_hidden_layers': '',
-    },
-    {
-        'experiment_name': 'multimodal_cross_attention_projection_cnn_mlp',
-        'modality': 'multimodal',
-        'use_cross_attention': 'true',
-        'dropout_mlp': 0.15,
+        'projection_dim': 256,
+        'use_cnn_layer': 'true',
         'classifier_hidden_layers': '1024,512',
     },
+    # 不用CNN
     {
-        'experiment_name': 'multimodal_cross_attention_projection_cnn_mlp_optional',
+        'experiment_name': 'multimodal_no_cnn',
         'modality': 'multimodal',
         'use_cross_attention': 'true',
-        'dropout_mlp': 0.15,
-        'classifier_hidden_layers': '',
+        'projection_dim': 256,
+        'use_cnn_layer': 'false',
+        'classifier_hidden_layers': '1024,512',
     },
+    # 不用 projection
     {
-        'experiment_name': 'multimodal_cross_attention_projection_cnn_linear_less_mlp',
+        'experiment_name': 'multimodal_no_projection',
         'modality': 'multimodal',
         'use_cross_attention': 'true',
-        'dropout_mlp': 0.15,
+        'projection_dim': None,
+        'use_cnn_layer': 'true',
+        'classifier_hidden_layers': '1024,512',
+    },
+    # 不用 cross-attention
+    {
+        'experiment_name': 'multimodal_no_cross-attention',
+        'modality': 'multimodal',
+        'use_cross_attention': 'false',
+        'projection_dim': 256,
+        'use_cnn_layer': 'true',
+        'classifier_hidden_layers': '1024,512',
+    },
+    # less MLP
+    {
+        'experiment_name': 'multimodal_less_mlp',
+        'modality': 'multimodal',
+        'use_cross_attention': 'true',
+        'projection_dim': 256,
+        'use_cnn_layer': 'true',
         'classifier_hidden_layers': '512,256',
     },
+    # more MLP
     {
-        'experiment_name': 'multimodal_cross_attention_projection_cnn_linear_more_mlp',
+        'experiment_name': 'multimodal_more_mlp',
         'modality': 'multimodal',
         'use_cross_attention': 'true',
-        'dropout_mlp': 0.15,
+        'projection_dim': 256,
+        'use_cnn_layer': 'true',
         'classifier_hidden_layers': '2048,1024',
     },
+    # 图像模态 baseline
     {
-        'experiment_name': 'image_only_cnn_linear_mlp',
+        'experiment_name': 'image_only_with_cnn',
         'modality': 'image',
         'use_cross_attention': 'false',
-        'dropout_mlp': 0.15,
+        'projection_dim': None,
+        'use_cnn_layer': 'true',
         'classifier_hidden_layers': '1024,512',
     },
+    # 图像模态不使用CNN
     {
-        'experiment_name': 'image_only_cnn_linear_mlp_optional',
+        'experiment_name': 'image_only_no_cnn',
         'modality': 'image',
         'use_cross_attention': 'false',
-        'dropout_mlp': 0.5,
-        'classifier_hidden_layers': '',
-    },
-    {
-        'experiment_name': 'text_only_cnn_linear_mlp',
-        'modality': 'text',
-        'use_cross_attention': 'false',
-        'dropout_mlp': 0.15,
+        'projection_dim': None,
+        'use_cnn_layer': 'false',
         'classifier_hidden_layers': '1024,512',
     },
+    # 文本模态 baseline
     {
-        'experiment_name': 'text_only_cnn_linear_mlp_optional',
+        'experiment_name': 'text_only_with_cnn',
         'modality': 'text',
         'use_cross_attention': 'false',
-        'dropout_mlp': 0.15,
-        'classifier_hidden_layers': '',
+        'projection_dim': None,
+        'use_cnn_layer': 'true',
+        'classifier_hidden_layers': '1024,512',
+    },
+    # 文本模态不使用CNN
+    {
+        'experiment_name': 'text_only_no_cnn',
+        'modality': 'text',
+        'use_cross_attention': 'false',
+        'projection_dim': None,
+        'use_cnn_layer': 'false',
+        'classifier_hidden_layers': '1024,512',
     },
 ]
 
-def run_experiment(experiment_config):
-    """运行一个实验，调用 run_experiment.py 来执行"""
+def run_experiment(config):
     command = [
         'python', 'run_experiment.py',
-        '--experiment_name', experiment_config['experiment_name'],
-        '--modality', experiment_config['modality'],
-        '--use_cross_attention', experiment_config['use_cross_attention'],
-        '--dropout_mlp', str(experiment_config['dropout_mlp']),
-        '--classifier_hidden_layers', experiment_config['classifier_hidden_layers'],
-        '--batch_size', '32',  # 使用一个固定的批次大小，可以根据需要修改
-        '--num_epochs', '10',  # 设定为10个epoch
-        '--learning_rate_head', '0.001',
-        '--learning_rate_clip', '0.0001',
-        '--weight_decay_head', '0.01',
-        '--weight_decay_clip', '0.01',
-        '--freeze_clip', 'false',
-        '--device', 'cuda',
-        '--num_workers', '4',
+        '--experiment_name', config['experiment_name'],
+        '--modality', config['modality'],
+        '--use_cross_attention', config['use_cross_attention'],
+        '--use_cnn_layer', config['use_cnn_layer'],
+        '--classifier_hidden_layers', config['classifier_hidden_layers'],
     ]
 
-    print(f"Running experiment: {experiment_config['experiment_name']}")
+    # 处理 projection_dim
+    if config['projection_dim'] is not None:
+        command += ['--projection_dim', str(config['projection_dim'])]
+
+    print(f"Running experiment: {config['experiment_name']}")
     subprocess.run(command)
 
 def main():
-    """运行所有实验"""
-    for experiment_config in experiments:
-        run_experiment(experiment_config)
+    for config in experiments:
+        run_experiment(config)
 
 if __name__ == "__main__":
     main()
