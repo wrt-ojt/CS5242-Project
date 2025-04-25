@@ -1,0 +1,267 @@
+2025-04-24 14:17:20,958 [INFO] Logging setup complete.
+2025-04-24 14:17:20,958 [INFO] Starting experiment: multimodal_all_default
+2025-04-24 14:17:20,959 [INFO] Configuration:
+{
+    "raw_data_dir": "/disk3/wangrt/model/CS5242-Project/raw_data",
+    "label_file": "/disk3/wangrt/model/CS5242-Project/label.csv",
+    "preprocessed_data_dir": "/disk3/wangrt/model/CS5242-Project/preprocessed_data",
+    "output_dir": "/disk3/wangrt/model/CS5242-Project/output",
+    "experiment_name": "multimodal_all_default",
+    "force_preprocess": false,
+    "clip_model_name": "openai/clip-vit-base-patch32",
+    "modality": "multimodal",
+    "freeze_clip": true,
+    "projection_dim": 256,
+    "use_cross_attention": true,
+    "num_attention_heads": 8,
+    "use_cnn_layer": true,
+    "cnn_out_channels_ratio": 0.5,
+    "classifier_hidden_layers": [
+        1024,
+        512
+    ],
+    "num_classes": 3,
+    "device": "cuda:5",
+    "batch_size": 128,
+    "num_epochs": 20,
+    "learning_rate_clip": 1e-06,
+    "learning_rate_head": 0.0001,
+    "weight_decay_clip": 0.01,
+    "weight_decay_head": 0.01,
+    "dropout_attention": 0.1,
+    "dropout_mlp": 0.15,
+    "early_stopping_patience": 5,
+    "num_workers": 4,
+    "val_split_ratio": 0.15,
+    "test_split_ratio": 0.15,
+    "seed": 42,
+    "max_token_length": 77,
+    "label_map": {
+        "negative": 0,
+        "neutral": 1,
+        "positive": 2
+    },
+    "inv_label_map": {
+        "0": "negative",
+        "1": "neutral",
+        "2": "positive"
+    },
+    "experiment_output_dir": "/disk3/wangrt/model/CS5242-Project/output/multimodal_all_default"
+}
+2025-04-24 14:17:20,961 [INFO] Random seed set to 42
+2025-04-24 14:17:20,964 [INFO] Creating DataLoaders...
+2025-04-24 14:17:20,977 [INFO] Initializing model...
+2025-04-24 14:17:25,759 [INFO] Model loaded on device: cuda:5
+2025-04-24 14:17:25,764 [INFO] Setting up optimizer...
+2025-04-24 14:17:25,767 [INFO] Optimizing 0 CLIP parameters with LR=1e-06, WD=0.01
+2025-04-24 14:17:25,771 [INFO] Optimizing 20 Head parameters with LR=0.0001, WD=0.01
+2025-04-24 14:17:25,772 [INFO] --- Starting Training ---
+2025-04-24 14:17:25,774 [INFO] 
+--- Epoch 1/20 ---
+2025-04-24 14:17:35,231 [INFO] Epoch 1 Train Loss: 1.0031
+2025-04-24 14:17:39,411 [INFO] Epoch 1 Validation Loss: 0.8930, Validation Accuracy: 0.5946
+2025-04-24 14:17:39,412 [INFO] Validation Classification Report (Epoch 1):
+              precision    recall  f1-score   support
+
+    negative       0.00      0.00      0.00       336
+     neutral       0.00      0.00      0.00       116
+    positive       0.59      1.00      0.75       663
+
+    accuracy                           0.59      1115
+   macro avg       0.20      0.33      0.25      1115
+weighted avg       0.35      0.59      0.44      1115
+
+2025-04-24 14:17:39,413 [INFO] Epoch 1 duration: 13.64 seconds
+2025-04-24 14:17:41,071 [INFO] Validation accuracy improved to 0.5946. Saving best model to /disk3/wangrt/model/CS5242-Project/output/multimodal_all_default/best_model.pth
+2025-04-24 14:17:41,072 [INFO] 
+--- Epoch 2/20 ---
+2025-04-24 14:17:49,403 [INFO] Epoch 2 Train Loss: 0.8728
+2025-04-24 14:17:53,114 [INFO] Epoch 2 Validation Loss: 0.8483, Validation Accuracy: 0.5946
+2025-04-24 14:17:53,119 [INFO] Validation Classification Report (Epoch 2):
+              precision    recall  f1-score   support
+
+    negative       0.00      0.00      0.00       336
+     neutral       0.00      0.00      0.00       116
+    positive       0.59      1.00      0.75       663
+
+    accuracy                           0.59      1115
+   macro avg       0.20      0.33      0.25      1115
+weighted avg       0.35      0.59      0.44      1115
+
+2025-04-24 14:17:53,120 [INFO] Epoch 2 duration: 12.05 seconds
+2025-04-24 14:17:53,120 [INFO] Validation accuracy did not improve. Current best: 0.5946. Epochs without improvement: 1/5
+2025-04-24 14:17:53,121 [INFO] 
+--- Epoch 3/20 ---
+2025-04-24 14:18:01,480 [INFO] Epoch 3 Train Loss: 0.7820
+2025-04-24 14:18:05,586 [INFO] Epoch 3 Validation Loss: 0.7373, Validation Accuracy: 0.6933
+2025-04-24 14:18:05,586 [INFO] Validation Classification Report (Epoch 3):
+              precision    recall  f1-score   support
+
+    negative       0.64      0.54      0.59       336
+     neutral       0.00      0.00      0.00       116
+    positive       0.71      0.89      0.79       663
+
+    accuracy                           0.69      1115
+   macro avg       0.45      0.48      0.46      1115
+weighted avg       0.62      0.69      0.65      1115
+
+2025-04-24 14:18:05,587 [INFO] Epoch 3 duration: 12.47 seconds
+2025-04-24 14:18:09,114 [INFO] Validation accuracy improved to 0.6933. Saving best model to /disk3/wangrt/model/CS5242-Project/output/multimodal_all_default/best_model.pth
+2025-04-24 14:18:09,115 [INFO] 
+--- Epoch 4/20 ---
+2025-04-24 14:18:15,684 [INFO] Epoch 4 Train Loss: 0.6500
+2025-04-24 14:18:19,593 [INFO] Epoch 4 Validation Loss: 0.6674, Validation Accuracy: 0.7175
+2025-04-24 14:18:19,594 [INFO] Validation Classification Report (Epoch 4):
+              precision    recall  f1-score   support
+
+    negative       0.61      0.72      0.66       336
+     neutral       1.00      0.01      0.02       116
+    positive       0.78      0.84      0.81       663
+
+    accuracy                           0.72      1115
+   macro avg       0.80      0.52      0.50      1115
+weighted avg       0.75      0.72      0.68      1115
+
+2025-04-24 14:18:19,594 [INFO] Epoch 4 duration: 10.48 seconds
+2025-04-24 14:18:23,040 [INFO] Validation accuracy improved to 0.7175. Saving best model to /disk3/wangrt/model/CS5242-Project/output/multimodal_all_default/best_model.pth
+2025-04-24 14:18:23,041 [INFO] 
+--- Epoch 5/20 ---
+2025-04-24 14:18:28,763 [INFO] Epoch 5 Train Loss: 0.5448
+2025-04-24 14:18:32,288 [INFO] Epoch 5 Validation Loss: 0.6506, Validation Accuracy: 0.7283
+2025-04-24 14:18:32,291 [INFO] Validation Classification Report (Epoch 5):
+              precision    recall  f1-score   support
+
+    negative       0.66      0.66      0.66       336
+     neutral       0.67      0.12      0.20       116
+    positive       0.76      0.87      0.81       663
+
+    accuracy                           0.73      1115
+   macro avg       0.70      0.55      0.56      1115
+weighted avg       0.72      0.73      0.70      1115
+
+2025-04-24 14:18:32,292 [INFO] Epoch 5 duration: 9.25 seconds
+2025-04-24 14:18:38,448 [INFO] Validation accuracy improved to 0.7283. Saving best model to /disk3/wangrt/model/CS5242-Project/output/multimodal_all_default/best_model.pth
+2025-04-24 14:18:38,448 [INFO] 
+--- Epoch 6/20 ---
+2025-04-24 14:18:44,951 [INFO] Epoch 6 Train Loss: 0.4657
+2025-04-24 14:18:48,793 [INFO] Epoch 6 Validation Loss: 0.6680, Validation Accuracy: 0.7345
+2025-04-24 14:18:48,795 [INFO] Validation Classification Report (Epoch 6):
+              precision    recall  f1-score   support
+
+    negative       0.63      0.74      0.68       336
+     neutral       0.56      0.19      0.28       116
+    positive       0.80      0.83      0.81       663
+
+    accuracy                           0.73      1115
+   macro avg       0.67      0.59      0.59      1115
+weighted avg       0.73      0.73      0.72      1115
+
+2025-04-24 14:18:48,795 [INFO] Epoch 6 duration: 10.35 seconds
+2025-04-24 14:18:52,898 [INFO] Validation accuracy improved to 0.7345. Saving best model to /disk3/wangrt/model/CS5242-Project/output/multimodal_all_default/best_model.pth
+2025-04-24 14:18:52,905 [INFO] 
+--- Epoch 7/20 ---
+2025-04-24 14:19:00,543 [INFO] Epoch 7 Train Loss: 0.3821
+2025-04-24 14:19:04,803 [INFO] Epoch 7 Validation Loss: 0.7071, Validation Accuracy: 0.7336
+2025-04-24 14:19:04,804 [INFO] Validation Classification Report (Epoch 7):
+              precision    recall  f1-score   support
+
+    negative       0.63      0.75      0.68       336
+     neutral       0.49      0.25      0.33       116
+    positive       0.82      0.81      0.82       663
+
+    accuracy                           0.73      1115
+   macro avg       0.65      0.60      0.61      1115
+weighted avg       0.73      0.73      0.73      1115
+
+2025-04-24 14:19:04,805 [INFO] Epoch 7 duration: 11.90 seconds
+2025-04-24 14:19:04,805 [INFO] Validation accuracy did not improve. Current best: 0.7345. Epochs without improvement: 1/5
+2025-04-24 14:19:04,806 [INFO] 
+--- Epoch 8/20 ---
+2025-04-24 14:19:11,230 [INFO] Epoch 8 Train Loss: 0.3032
+2025-04-24 14:19:15,594 [INFO] Epoch 8 Validation Loss: 0.7762, Validation Accuracy: 0.7318
+2025-04-24 14:19:15,601 [INFO] Validation Classification Report (Epoch 8):
+              precision    recall  f1-score   support
+
+    negative       0.67      0.65      0.66       336
+     neutral       0.44      0.18      0.26       116
+    positive       0.78      0.87      0.82       663
+
+    accuracy                           0.73      1115
+   macro avg       0.63      0.57      0.58      1115
+weighted avg       0.71      0.73      0.71      1115
+
+2025-04-24 14:19:15,602 [INFO] Epoch 8 duration: 10.80 seconds
+2025-04-24 14:19:15,602 [INFO] Validation accuracy did not improve. Current best: 0.7345. Epochs without improvement: 2/5
+2025-04-24 14:19:15,603 [INFO] 
+--- Epoch 9/20 ---
+2025-04-24 14:19:23,700 [INFO] Epoch 9 Train Loss: 0.2286
+2025-04-24 14:19:27,208 [INFO] Epoch 9 Validation Loss: 0.8452, Validation Accuracy: 0.7309
+2025-04-24 14:19:27,208 [INFO] Validation Classification Report (Epoch 9):
+              precision    recall  f1-score   support
+
+    negative       0.65      0.68      0.67       336
+     neutral       0.40      0.23      0.30       116
+    positive       0.80      0.84      0.82       663
+
+    accuracy                           0.73      1115
+   macro avg       0.62      0.59      0.59      1115
+weighted avg       0.72      0.73      0.72      1115
+
+2025-04-24 14:19:27,208 [INFO] Epoch 9 duration: 11.60 seconds
+2025-04-24 14:19:27,208 [INFO] Validation accuracy did not improve. Current best: 0.7345. Epochs without improvement: 3/5
+2025-04-24 14:19:27,208 [INFO] 
+--- Epoch 10/20 ---
+2025-04-24 14:19:35,487 [INFO] Epoch 10 Train Loss: 0.1585
+2025-04-24 14:19:39,792 [INFO] Epoch 10 Validation Loss: 0.9792, Validation Accuracy: 0.7327
+2025-04-24 14:19:39,792 [INFO] Validation Classification Report (Epoch 10):
+              precision    recall  f1-score   support
+
+    negative       0.66      0.69      0.68       336
+     neutral       0.41      0.22      0.28       116
+    positive       0.79      0.84      0.82       663
+
+    accuracy                           0.73      1115
+   macro avg       0.62      0.58      0.59      1115
+weighted avg       0.72      0.73      0.72      1115
+
+2025-04-24 14:19:39,792 [INFO] Epoch 10 duration: 12.58 seconds
+2025-04-24 14:19:39,792 [INFO] Validation accuracy did not improve. Current best: 0.7345. Epochs without improvement: 4/5
+2025-04-24 14:19:39,792 [INFO] 
+--- Epoch 11/20 ---
+2025-04-24 14:19:47,323 [INFO] Epoch 11 Train Loss: 0.1161
+2025-04-24 14:19:50,546 [INFO] Epoch 11 Validation Loss: 1.0457, Validation Accuracy: 0.7238
+2025-04-24 14:19:50,559 [INFO] Validation Classification Report (Epoch 11):
+              precision    recall  f1-score   support
+
+    negative       0.67      0.65      0.66       336
+     neutral       0.36      0.26      0.30       116
+    positive       0.79      0.84      0.82       663
+
+    accuracy                           0.72      1115
+   macro avg       0.61      0.58      0.59      1115
+weighted avg       0.71      0.72      0.72      1115
+
+2025-04-24 14:19:50,559 [INFO] Epoch 11 duration: 10.77 seconds
+2025-04-24 14:19:50,560 [INFO] Validation accuracy did not improve. Current best: 0.7345. Epochs without improvement: 5/5
+2025-04-24 14:19:50,560 [INFO] Early stopping triggered after 5 epochs without improvement.
+2025-04-24 14:19:50,561 [INFO] 
+Training finished. Best validation accuracy: 0.7345
+2025-04-24 14:19:50,561 [INFO] 
+--- Evaluating on Test Set ---
+2025-04-24 14:19:51,341 [INFO] Loaded best model weights from /disk3/wangrt/model/CS5242-Project/output/multimodal_all_default/best_model.pth for testing.
+2025-04-24 14:19:53,964 [INFO] 
+Test Loss: 0.7114
+2025-04-24 14:19:53,969 [INFO] Test Accuracy: 0.7448
+2025-04-24 14:19:53,969 [INFO] Test Set Classification Report:
+              precision    recall  f1-score   support
+
+    negative       0.67      0.78      0.72        72
+     neutral       0.50      0.12      0.19        25
+    positive       0.79      0.84      0.82       142
+
+    accuracy                           0.74       239
+   macro avg       0.66      0.58      0.58       239
+weighted avg       0.73      0.74      0.72       239
+
+2025-04-24 14:19:53,970 [INFO] Results saved to /disk3/wangrt/model/CS5242-Project/output/multimodal_all_default/test_results.json
+2025-04-24 14:19:53,970 [INFO] --- Experiment Finished: multimodal_all_default ---

@@ -1,0 +1,38 @@
+{
+    "test_loss": 0.6903801560401917,
+    "test_accuracy": 0.7071129707112971,
+    "test_classification_report_dict": {
+        "negative": {
+            "precision": 0.6486486486486487,
+            "recall": 0.6666666666666666,
+            "f1-score": 0.6575342465753424,
+            "support": 72.0
+        },
+        "neutral": {
+            "precision": 0.4,
+            "recall": 0.16,
+            "f1-score": 0.22857142857142856,
+            "support": 25.0
+        },
+        "positive": {
+            "precision": 0.7548387096774194,
+            "recall": 0.823943661971831,
+            "f1-score": 0.7878787878787878,
+            "support": 142.0
+        },
+        "accuracy": 0.7071129707112971,
+        "macro avg": {
+            "precision": 0.601162452775356,
+            "recall": 0.5502034428794992,
+            "f1-score": 0.5579948210085196,
+            "support": 239.0
+        },
+        "weighted avg": {
+            "precision": 0.6857313785644195,
+            "recall": 0.7071129707112971,
+            "f1-score": 0.6901068591903692,
+            "support": 239.0
+        }
+    },
+    "test_classification_report_str": "              precision    recall  f1-score   support\n\n    negative       0.65      0.67      0.66        72\n     neutral       0.40      0.16      0.23        25\n    positive       0.75      0.82      0.79       142\n\n    accuracy                           0.71       239\n   macro avg       0.60      0.55      0.56       239\nweighted avg       0.69      0.71      0.69       239\n"
+}

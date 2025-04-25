@@ -90,9 +90,11 @@ def main():
     parser.add_argument('--dropout_mlp', type=float, help="Dropout rate for the MLP head.")
     parser.add_argument('--classifier_hidden_layers', type=str, help="Comma-separated list of hidden layer sizes (e.g., '1024,512'). Use '' for direct.")
     parser.add_argument('--force_preprocess', action='store_true', help="Force data preprocessing.")
-    parser.add_argument('--device', type=str, choices=['cuda', 'cpu'], help="Device to use ('cuda' or 'cpu').")
+    parser.add_argument('--device', type=str, choices=['cuda:5', 'cpu'], help="Device to use ('cuda' or 'cpu').")
     parser.add_argument('--num_workers', type=int, help="Number of workers for DataLoader.")
     # Add more arguments as needed
+    parser.add_argument('--projection_dim', type=int, help="Projection dimension for the model.")
+    parser.add_argument('--use_cnn_layer', type=str, help="Use cnn layer ('true' or 'false').")
 
     args = parser.parse_args()
     config = override_config(CONFIG.copy(), args) # Use a copy to avoid modifying the original CONFIG dict
