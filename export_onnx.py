@@ -11,14 +11,26 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
 
 from src.config import CONFIG # Import default config
 from src.model import MultimodalClassifier
-# Import the dummy input creation function from visualize_model.py
-# Ensure visualize_model.py is in the same directory or accessible via PYTHONPATH
-try:
-    from visualize_model import create_dummy_input
-except ImportError:
-    print("Error: visualize_model.py not found or create_dummy_input function missing.")
-    print("Please ensure visualize_model.py exists and contains the create_dummy_input function.")
-    sys.exit(1)
+# No longer importing from visualize_model.py
+
+# --- Dummy Input Creation Function (Copied here) ---
+def create_dummy_input(config, device):
+    """Creates a dummy input batch matching model expectations."""
+    batch_size = 2 # Use a small batch size for export
+    max_len = config['max_token_length']
+    # CLIP image processor typically outputs (B, C, H, W), e.g., (B, 3, 224, 224)
+    dummy_pixel_values = torch.randn(batch_size, 3, 224, 224).to(device)
+    # Use actual vocab size if known, otherwise a reasonable default
+    vocab_size = config.get('vocab_size', 49408) # CLIP's vocab size
+    dummy_input_ids = torch.randint(0, vocab_size, (batch_size, max_len), dtype=torch.long).to(device)
+    dummy_attention_mask = torch.ones(batch_size, max_len, dtype=torch.long).to(device)
+
+    dummy_batch = {
+        'pixel_values': dummy_pixel_values,
+        'input_ids': dummy_input_ids,
+        'attention_mask': dummy_attention_mask
+    }
+    return dummy_batch
 
 # --- Argument Parsing ---
 if __name__ == "__main__":
@@ -32,7 +44,6 @@ if __name__ == "__main__":
     config = CONFIG.copy() # Start with default config
 
     # --- Apply Config Overrides (Optional) ---
-    # Ensure overrides match the structure used when saving the weights
     if args.config_overrides:
         try:
             overrides = json.loads(args.config_overrides)
@@ -45,10 +56,9 @@ if __name__ == "__main__":
 
     # --- Instantiate Model ---
     print("Initializing model architecture...")
-    # Ensure model uses the potentially overridden config that matches the saved weights
     model = MultimodalClassifier(config)
-    model.to(device) # Move model to CPU
-    model.eval() # Set to evaluation mode
+    model.to(device)
+    model.eval()
 
     # --- Load Weights ---
     if not os.path.exists(args.weights_path):
@@ -57,15 +67,10 @@ if __name__ == "__main__":
 
     print(f"Loading weights from {args.weights_path}...")
     try:
-        # Load state dict (adjust map_location if weights were saved on GPU)
         state_dict = torch.load(args.weights_path, map_location=device)
-        # Handle potential DataParallel wrapper if weights were saved that way
-        if isinstance(state_dict, dict) and 'model_state_dict' in state_dict: # Check if it's a checkpoint file
+        if isinstance(state_dict, dict) and 'model_state_dict' in state_dict:
              state_dict = state_dict['model_state_dict']
-
-        # Remove 'module.' prefix if saved using DataParallel
         state_dict = {k.replace('module.', ''): v for k, v in state_dict.items()}
-
         model.load_state_dict(state_dict)
         print("Weights loaded successfully.")
     except Exception as e:
@@ -74,25 +79,16 @@ if __name__ == "__main__":
 
     # --- Create Dummy Input ---
     print("Creating dummy input...")
-    # Use the same config that the loaded model was trained with/defined by
+    # Now calls the function defined within this script
     dummy_input_dict = create_dummy_input(config, device)
-    # ONNX export often requires input as a tuple or list of tensors,
-    # matching the order expected by the model's forward method if it were
-    # to accept positional arguments instead of a dict.
-    # Let's try passing the dictionary directly first, as some opsets support it.
-    # If it fails, we might need to modify the model's forward or pass a tuple.
-    # dummy_input_tuple = (dummy_input_dict['pixel_values'],
-    #                      dummy_input_dict['input_ids'],
-    #                      dummy_input_dict['attention_mask'])
 
     # --- Define Input/Output Names ---
-    # These names will appear in the Netron graph
-    input_names = list(dummy_input_dict.keys()) # e.g., ['pixel_values', 'input_ids', 'attention_mask']
-    output_names = ["logits"] # Name for the final output tensor
+    input_names = list(dummy_input_dict.keys())
+    output_names = ["logits"]
 
     # --- Ensure Output Directory Exists ---
     output_dir = os.path.dirname(args.output_path)
-    if output_dir: # Only create if path includes a directory
+    if output_dir:
         os.makedirs(output_dir, exist_ok=True)
 
     # --- Export to ONNX ---
@@ -100,14 +96,13 @@ if __name__ == "__main__":
     try:
         torch.onnx.export(
             model,
-            dummy_input_dict, # Pass the dictionary as input
+            dummy_input_dict, # Pass the dictionary
             args.output_path,
-            export_params=True,        # Store trained weights within the file
-            opset_version=args.opset_version, # ONNX version
-            do_constant_folding=True,  # Optimization
-            input_names=input_names,   # Model input names
-            output_names=output_names, # Model output names
-            # Optional: Define dynamic axes if batch size or sequence length can vary
+            export_params=True,
+            opset_version=args.opset_version,
+            do_constant_folding=True,
+            input_names=input_names,
+            output_names=output_names,
             dynamic_axes={
                 'pixel_values': {0: 'batch_size'},
                 'input_ids': {0: 'batch_size', 1: 'sequence_length'},
@@ -124,10 +119,9 @@ if __name__ == "__main__":
         print(f"Error: {e}")
         print("\nCommon issues:")
         print("- Unsupported PyTorch operations in the specified Opset version.")
-        print("- Model forward pass expecting a different input format (e.g., tuple vs. dict). Try modifying forward or input format.")
+        print("- Model forward pass expecting a different input format (e.g., tuple vs. dict).")
         print("- Issues with dynamic shapes or control flow within the model.")
         print(f"{'='*80}")
         sys.exit(1)
 
     print("ONNX export script finished.")
-
