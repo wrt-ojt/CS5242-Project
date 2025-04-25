@@ -118,7 +118,9 @@ if __name__ == "__main__":
     dummy_input_dict = create_dummy_input(config, device)
 
     # --- Define Input/Output Names ---
-    input_names = list(dummy_input_dict.keys())
+    # IMPORTANT: The input names provided here MUST match the keys used
+    # inside the model's forward method when accessing the dictionary.
+    input_names = list(dummy_input_dict.keys()) # ['pixel_values', 'input_ids', 'attention_mask']
     output_names = ["logits"]
 
     # --- Ensure Output Directory Exists ---
@@ -129,17 +131,18 @@ if __name__ == "__main__":
     # --- Export to ONNX ---
     print(f"Exporting model to ONNX format at {args.output_path} (Opset: {args.opset_version})...")
     try:
+        # *** THE FIX IS HERE: Wrap the dummy input dictionary in a tuple ***
         torch.onnx.export(
             model,
-            dummy_input_dict, # Pass the dictionary
+            (dummy_input_dict,), # Pass the dictionary wrapped in a tuple
             args.output_path,
             export_params=True,
             opset_version=args.opset_version,
             do_constant_folding=True,
-            input_names=input_names,
+            input_names=input_names,   # Still provide names for dictionary keys for clarity in Netron
             output_names=output_names,
             dynamic_axes={
-                'pixel_values': {0: 'batch_size'},
+                'pixel_values': {0: 'batch_size'}, # Reference keys for dynamic axes
                 'input_ids': {0: 'batch_size', 1: 'sequence_length'},
                 'attention_mask': {0: 'batch_size', 1: 'sequence_length'},
                 'logits': {0: 'batch_size'}
@@ -154,7 +157,7 @@ if __name__ == "__main__":
         print(f"Error: {e}")
         print("\nCommon issues:")
         print("- Unsupported PyTorch operations in the specified Opset version.")
-        print("- Model forward pass expecting a different input format (e.g., tuple vs. dict).")
+        print("- Model forward pass expecting a different input format (e.g., tuple vs. dict). Check the input wrapper.")
         print("- Issues with dynamic shapes or control flow within the model.")
         print(f"{'='*80}")
         sys.exit(1)
