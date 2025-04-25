@@ -2,6 +2,10 @@
 
 This project implements a multimodal sentiment classification model using features extracted from the CLIP (Contrastive Language–Image Pre-training) model. It allows for flexible configuration, experimentation with different model architectures (including single-modality baselines), and handles data preprocessing efficiently.
 
+## Dataset
+
+The dataset is from [MVSA-Single](https://www.kaggle.com/datasets/vincemarcs/mvsasingle).
+
 ## Features
 
 * **CLIP-Based:** Leverages powerful pre-trained image and text embeddings from CLIP.
