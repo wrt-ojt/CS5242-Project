@@ -71,15 +71,3 @@ The dataset is from [MVSA-Single](https://www.kaggle.com/datasets/vincemarcs/mvs
     * `logs.log`: Detailed logs from the run (training progress, validation scores, errors).
     * `best_model.pth`: The state dictionary of the model with the best validation accuracy.
     * `test_results.json`: Final evaluation metrics on the test set.
-
-## TODO
-1. multimodal + cross-attention + projection + CNN + linear projection layers + default MLP
-2. multimodal + cross-attention + projection + (CNN) + linear projection layers + default MLP
-3. multimodal + cross-attention + (projection) + CNN + linear projection layers + default MLP
-4. multimodal + (cross-attention) + projection + CNN + linear projection layers + default MLP
-5. multimodal + cross-attention + projection + CNN + linear projection layers + less MLP
-6. multimodal + cross-attention + projection + CNN + linear projection layers + more MLP
-7. image-only + CNN + linear projection layers + default MLP
-8. image-only + (CNN) + linear projection layers + default MLP (optional)
-9. text-only + CNN + linear projection layers + default MLP
-10. text-only + (CNN) + linear projection layers + default MLP (optional)
